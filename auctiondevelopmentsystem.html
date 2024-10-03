@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auction Development System</title>
+</head>
+<style>
+    body{
+        font-family: Arial, sans-serif;
+        background-color: #f9f9f9;
+        margin: 0;
+        padding: 0;
+    }
+
+    img{
+        position: relative;
+        width: auto;
+        
+    }
+    .auction_container{
+        width: 50%;
+        margin: 0 auto;
+        background-color: white;
+        padding: 20px;
+        margin-top: 50px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    h1{
+        text-align: center;
+    }
+
+    .auction_item{
+        text-align: center;
+    }
+
+    #placeBidBtn{
+        background-color: #28a745;
+        color: white;
+        border: none;
+        padding: 10px;
+        cursor: pointer;
+    }
+
+    #placeBidBtn:hover{
+        background-color: #219938;
+    }
+
+    #bidMessage{
+        margin-top: 10px;
+        font-weight: bold;
+    }
+</style>
+<body>
+    <div class="auction_container">
+        <h1>Online Auction System</h1>
+
+        <div class="aution-item">
+            <h2>Auction Vase</h2>
+
+            <!-- <img src="auction.jpg" alt="Antique Vase" width="500"> -->
+            <!-- <img src="auction2.jpg" alt="Antique Vase" width="200"> -->
+            <img src="auction3.jpg" alt="Antique Vase" width="200"> 
+            <p>Current Bid: 
+                <span id="currentBid">$100</span>
+            </p>
+            <label for="bidAmout">Enter your bid: </label>
+            <input type="number" id="bidAmout" min="101" placeholder="Enter bid amount">
+            <button id="placeBidBtn">Place Bid</button>
+            <p id="bidMessage"></p>
+        </div>
+    </div>
+    <script>
+        document.getElementById("placeBidBtn").addEventListener("click", function(){
+            let bidAmount = document.getElementById("bidAmount").value;
+            let currentBid = parseInt(document.getElementById("currentBid").innerText.replace('$',''));
+            if(bidAmount > currentBid){
+                <?php 
+                    session_start();
+                    if(isset($>POST['bidAmount'])){
+                        $newBid = $_POST['bidAmount'];
+
+                        if(!isset($_SESSION['currentBid'])||$_SESSION[currentBid] < $newBid){
+                            $_SESSION['currentBid'] = $newBid;
+                                echo "success";
+                        }
+                        else{
+                            echo "error";
+                        }
+                    }
+                ?>
+            let xhr = new XMLHttpRequest();
+            xhr.open("POST", "bid.php", true);
+
+            xhr.setRequestHeader("Content_Type", "application/x-www-form-urlencoded");
+            xhr.onreadystatechange = function(){
+                if(xhr.readyState == 4 && xhr.status == 200){
+                    document.getElementById("currentBid").innerText = "$" + bidAmount;
+                    document.getElementById("bidMessage").style.color = "Bid placed successfully!";
+
+                    document.getElementById("bidMessage").style.color = "green";
+                }
+            };
+            xhr.send("bidAmount=" + bidAmount);
+        }
+        else{
+            document.getElementById("bidMessage").innerText = "Your bid must be higher than the current bid!";
+            document.getElementById("bidMessage").style.color = "red";
+        }
+        });
+    </script>
+</body>
+</html>
