@@ -1,0 +1,45 @@
+body{
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+}
+
+img{
+    position: relative;
+    width: auto;
+    
+}
+.auction_container{
+    width: 50%;
+    margin: 0 auto;
+    background-color: white;
+    padding: 20px;
+    margin-top: 50px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+h1{
+    text-align: center;
+}
+
+.auction_item{
+    text-align: center;
+}
+
+#placeBidBtn{
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+}
+
+#placeBidBtn:hover{
+    background-color: #219938;
+}
+
+#bidMessage{
+    margin-top: 10px;
+    font-weight: bold;
+}
